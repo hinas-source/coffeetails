@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoffeeTales - Every Cup Has a Story</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#D4AF37',
+secondary: '#4A3831'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<style>
+:where([class^="ri-"])::before {
+content: "\f3c2";
+}
+* {
+scrollbar-width: thin;
+scrollbar-color: #D4AF37 #1A1A1A;
+}
+*::-webkit-scrollbar {
+width: 8px;
+}
+*::-webkit-scrollbar-track {
+background: #1A1A1A;
+}
+*::-webkit-scrollbar-thumb {
+background: #D4AF37;
+border-radius: 4px;
+}
+.hero-bg {
+background-image: url('https://readdy.ai/api/search-image?query=dark%20moody%20coffee%20beans%20texture%20background%20with%20warm%20golden%20lighting%20and%20deep%20shadows%20creating%20luxurious%20atmosphere%20for%20elegant%20coffee%20shop%20perfect%20for%20text%20overlay%20left%20side%20lighter%20for%20readability&width=1920&height=1080&seq=hero-bg&orientation=landscape');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+}
+.glass-morphism {
+backdrop-filter: blur(10px);
+background: rgba(26, 26, 26, 0.8);
+border: 1px solid rgba(212, 175, 55, 0.1);
+}
+.floating-animation {
+animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+0%, 100% { transform: translateY(0px); }
+50% { transform: translateY(-10px); }
+}
+.fade-in {
+opacity: 0;
+transform: translateY(30px);
+transition: all 0.8s ease;
+}
+.fade-in.visible {
+opacity: 1;
+transform: translateY(0);
+}
+.coffee-card {
+transition: all 0.3s ease;
+background: linear-gradient(145deg, #2A2A2A, #1A1A1A);
+}
+.coffee-card:hover {
+transform: translateY(-8px);
+box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+}
+.timeline-item {
+opacity: 0;
+transform: translateX(-50px);
+transition: all 0.6s ease;
+}
+.timeline-item.animate {
+opacity: 1;
+transform: translateX(0);
+}
+.masonry-item {
+break-inside: avoid;
+margin-bottom: 1rem;
+}
+.blog-card {
+background: linear-gradient(145deg, #2A2A2A, #1A1A1A);
+transition: all 0.3s ease;
+}
+.blog-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15);
+}
+.mood-picker-panel {
+transform: translateX(100%);
+transition: transform 0.3s ease;
+}
+.mood-picker-panel.open {
+transform: translateX(0);
+}
+.brew-timer {
+background: radial-gradient(circle, #D4AF37, #4A3831);
+}
+.custom-range {
+-webkit-appearance: none;
+appearance: none;
+background: #4A3831;
+height: 6px;
+border-radius: 3px;
+outline: none;
+}
+.custom-range::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background: #D4AF37;
+cursor: pointer;
+}
+.custom-range::-moz-range-thumb {
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background: #D4AF37;
+cursor: pointer;
+border: none;
+}
+.custom-checkbox {
+position: relative;
+width: 20px;
+height: 20px;
+background: transparent;
+border: 2px solid #4A3831;
+border-radius: 4px;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.custom-checkbox.checked {
+background: #D4AF37;
+border-color: #D4AF37;
+}
+.custom-checkbox.checked::after {
+content: '✓';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: #1A1A1A;
+font-size: 12px;
+font-weight: bold;
+}
+.custom-radio {
+position: relative;
+width: 20px;
+height: 20px;
+background: transparent;
+border: 2px solid #4A3831;
+border-radius: 50%;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.custom-radio.checked {
+border-color: #D4AF37;
+}
+.custom-radio.checked::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 10px;
+height: 10px;
+background: #D4AF37;
+border-radius: 50%;
+}
+.toggle-switch {
+position: relative;
+width: 50px;
+height: 24px;
+background: #4A3831;
+border-radius: 12px;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.toggle-switch.active {
+background: #D4AF37;
+}
+.toggle-switch::after {
+content: '';
+position: absolute;
+top: 2px;
+left: 2px;
+width: 20px;
+height: 20px;
+background: white;
+border-radius: 50%;
+transition: all 0.3s ease;
+}
+.toggle-switch.active::after {
+left: 28px;
+}
+</style>
+</head>
+<body class="bg-[#1A1A1A] text-white font-['Poppins'] overflow-x-hidden">
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 glass-morphism">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<div class="flex items-center">
+<span class="text-2xl font-['Pacifico'] text-primary">CoffeeTales</span>
+</div>
+<div class="hidden md:block">
+<div class="ml-10 flex items-baseline space-x-8">
+<a href="#home" class="text-white hover:text-primary transition-colors duration-300 font-medium">Home</a>
+<a href="#story" class="text-white hover:text-primary transition-colors duration-300 font-medium">Our Story</a>
+<a href="#menu" class="text-white hover:text-primary transition-colors duration-300 font-medium">Menu</a>
+<a href="#gallery" class="text-white hover:text-primary transition-colors duration-300 font-medium">Gallery</a>
+<a href="#visit" class="text-white hover:text-primary transition-colors duration-300 font-medium">Visit Us</a>
+<a href="#blog" class="text-white hover:text-primary transition-colors duration-300 font-medium">Blog</a>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button id="ambient-toggle" class="toggle-switch"></button>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-music-line text-primary"></i>
+</div>
+</div>
+<div class="md:hidden">
+<button id="mobile-menu-btn" class="w-8 h-8 flex items-center justify-center">
+<i class="ri-menu-line text-white text-xl"></i>
+</button>
+</div>
+</div>
+</div>
+<div id="mobile-menu" class="md:hidden hidden glass-morphism">
+<div class="px-2 pt-2 pb-3 space-y-1">
+<a href="#home" class="block px-3 py-2 text-white hover:text-primary transition-colors">Home</a>
+<a href="#story" class="block px-3 py-2 text-white hover:text-primary transition-colors">Our Story</a>
+<a href="#menu" class="block px-3 py-2 text-white hover:text-primary transition-colors">Menu</a>
+<a href="#gallery" class="block px-3 py-2 text-white hover:text-primary transition-colors">Gallery</a>
+<a href="#visit" class="block px-3 py-2 text-white hover:text-primary transition-colors">Visit Us</a>
+<a href="#blog" class="block px-3 py-2 text-white hover:text-primary transition-colors">Blog</a>
+</div>
+</div>
+</nav>
+<!-- Floating Features Panel -->
+<div class="fixed right-0 top-1/2 transform -translate-y-1/2 z-40">
+<div class="flex flex-col space-y-4 p-4">
+<button id="mood-picker-btn" class="w-12 h-12 flex items-center justify-center bg-primary rounded-full hover:bg-opacity-80 transition-all duration-300 shadow-lg">
+<i class="ri-emotion-line text-[#1A1A1A] text-xl"></i>
+</button>
+<button id="brew-timer-btn" class="w-12 h-12 flex items-center justify-center bg-secondary rounded-full hover:bg-opacity-80 transition-all duration-300 shadow-lg">
+<i class="ri-timer-line text-white text-xl"></i>
+</button>
+<button id="whatsapp-btn" class="w-12 h-12 flex items-center justify-center bg-green-500 rounded-full hover:bg-opacity-80 transition-all duration-300 shadow-lg">
+<i class="ri-whatsapp-fill text-white text-xl"></i>
+</button>
+</div>
+</div>
+<!-- Hero Section -->
+<section id="home" class="relative min-h-screen hero-bg flex items-center justify-center">
+<div class="absolute inset-0 bg-black bg-opacity-60"></div>
+<div class="relative z-10 text-center max-w-4xl mx-auto px-4">
+<h1 class="text-5xl md:text-7xl font-['Playfair_Display'] font-bold mb-6 floating-animation">
+Every Cup Has a Story
+</h1>
+<p class="text-xl md:text-2xl mb-8 text-gray-300 font-light">
+Discover the tales behind every perfectly crafted cup at CoffeeTales
+</p>
+<button class="bg-primary text-[#1A1A1A] px-8 py-4 !rounded-button font-semibold text-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 whitespace-nowrap">
+Browse Menu
+</button>
+</div>
+<!-- Spotify Widget -->
+</section>
+<!-- Our Story Section -->
+<section id="story" class="py-20 bg-gradient-to-b from-[#1A1A1A] to-[#2A2A2A]">
+<div class="max-w-6xl mx-auto px-4">
+<div class="text-center mb-16 fade-in">
+<h2 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-6 text-primary">Our Story</h2>
+<p class="text-xl text-gray-300 max-w-3xl mx-auto">
+From humble beginnings to becoming Dubai's most beloved coffee sanctuary, every chapter of our journey is steeped in passion and dedication.
+</p>
+</div>
+<div class="relative">
+<div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary opacity-30"></div>
+<div class="space-y-16">
+<div class="timeline-item flex items-center">
+<div class="w-1/2 pr-8 text-right">
+<div class="bg-[#2A2A2A] p-6 rounded-lg border border-primary border-opacity-20">
+<h3 class="text-2xl font-['Playfair_Display'] font-semibold mb-3 text-primary">2018 - The Beginning</h3>
+<p class="text-gray-300">
+Founded with a simple dream: to create a space where every cup tells a story and every story brings people together.
+</p>
+</div>
+</div>
+<div class="w-4 h-4 bg-primary rounded-full absolute left-1/2 transform -translate-x-1/2 z-10"></div>
+<div class="w-1/2 pl-8">
+<img src="https://readdy.ai/api/search-image?query=vintage%20coffee%20shop%20interior%20with%20warm%20lighting%20wooden%20furniture%20and%20coffee%20equipment%20showing%20the%20early%20days%20of%20a%20cozy%20coffee%20establishment%20with%20nostalgic%20atmosphere&width=400&height=300&seq=story-1&orientation=landscape" alt="The Beginning" class="rounded-lg object-cover w-full h-48">
+</div>
+</div>
+<div class="timeline-item flex items-center">
+<div class="w-1/2 pr-8">
+<img src="https://readdy.ai/api/search-image?query=coffee%20roasting%20equipment%20and%20fresh%20coffee%20beans%20being%20roasted%20with%20golden%20lighting%20showing%20the%20craft%20and%20dedication%20to%20quality%20coffee%20roasting%20process&width=400&height=300&seq=story-2&orientation=landscape" alt="Craft Perfection" class="rounded-lg object-cover w-full h-48">
+</div>
+<div class="w-4 h-4 bg-primary rounded-full absolute left-1/2 transform -translate-x-1/2 z-10"></div>
+<div class="w-1/2 pl-8">
+<div class="bg-[#2A2A2A] p-6 rounded-lg border border-primary border-opacity-20">
+<h3 class="text-2xl font-['Playfair_Display'] font-semibold mb-3 text-primary">2020 - Craft Perfection</h3>
+<p class="text-gray-300">
+We mastered the art of coffee roasting, sourcing the finest beans from around the world to create our signature blends.
+</p>
+</div>
+</div>
+</div>
+<div class="timeline-item flex items-center">
+<div class="w-1/2 pr-8 text-right">
+<div class="bg-[#2A2A2A] p-6 rounded-lg border border-primary border-opacity-20">
+<h3 class="text-2xl font-['Playfair_Display'] font-semibold mb-3 text-primary">2023 - Community Hub</h3>
+<p class="text-gray-300">
+CoffeeTales became more than a café - it's now a community where stories are shared, friendships are forged, and memories are made.
+</p>
+</div>
+</div>
+<div class="w-4 h-4 bg-primary rounded-full absolute left-1/2 transform -translate-x-1/2 z-10"></div>
+<div class="w-1/2 pl-8">
+<img src="https://readdy.ai/api/search-image?query=bustling%20modern%20coffee%20shop%20with%20people%20socializing%20reading%20and%20working%20together%20showing%20community%20atmosphere%20with%20warm%20lighting%20and%20comfortable%20seating%20areas&width=400&height=300&seq=story-3&orientation=landscape" alt="Community Hub" class="rounded-lg object-cover w-full h-48">
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Menu Section -->
+<section id="menu" class="py-20 bg-[#1A1A1A]">
+<div class="max-w-7xl mx-auto px-4">
+<div class="text-center mb-16 fade-in">
+<h2 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-6 text-primary">Our Menu</h2>
+<p class="text-xl text-gray-300 max-w-3xl mx-auto">
+Each drink is carefully crafted to perfection, using premium ingredients and time-honored techniques.
+</p>
+</div>
+<div class="flex justify-center mb-12">
+<div class="bg-[#2A2A2A] rounded-full p-1 border border-primary border-opacity-20">
+<button class="menu-filter active px-6 py-3 rounded-full bg-primary text-[#1A1A1A] font-medium whitespace-nowrap" data-filter="all">All</button>
+<button class="menu-filter px-6 py-3 rounded-full text-white hover:text-primary transition-colors whitespace-nowrap" data-filter="hot">Hot Coffee</button>
+<button class="menu-filter px-6 py-3 rounded-full text-white hover:text-primary transition-colors whitespace-nowrap" data-filter="cold">Cold Brew</button>
+<button class="menu-filter px-6 py-3 rounded-full text-white hover:text-primary transition-colors whitespace-nowrap" data-filter="specialty">Specialty</button>
+</div>
+</div>
+<div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Hot Coffee Items -->
+<div class="coffee-card p-6 rounded-lg border border-primary border-opacity-20 cursor-pointer" data-category="hot" data-name="Signature Espresso" data-price="550" data-image="https://readdy.ai/api/search-image?query=perfect%20espresso%20shot%20in%20elegant%20white%20ceramic%20cup%20with%20golden%20crema%20on%20dark%20wooden%20surface%20with%20warm%20lighting%20showcasing%20premium%20coffee%20quality&width=300&height=300&seq=espresso&orientation=squarish">
+<img src="https://readdy.ai/api/search-image?query=perfect%20espresso%20shot%20in%20elegant%20white%20ceramic%20cup%20with%20golden%20crema%20on%20dark%20wooden%20surface%20with%20warm%20lighting%20showcasing%20premium%20coffee%20quality&width=300&height=300&seq=espresso&orientation=squarish" alt="Signature Espresso" class="w-full h-48 object-cover rounded-lg mb-4">
+<h3 class="text-xl font-['Cormorant_Garamond'] font-semibold mb-2">Signature Espresso</h3>
+<p class="text-gray-400 text-sm mb-4">Rich, bold espresso with notes of dark chocolate and caramel</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-['Montserrat'] font-semibold text-lg">AED 550</span>
+<button class="bg-primary text-[#1A1A1A] px-4 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Order Now</button>
+</div>
+</div>
+<div class="coffee-card p-6 rounded-lg border border-primary border-opacity-20 cursor-pointer" data-category="hot" data-name="Golden Cappuccino" data-price="620" data-image="https://readdy.ai/api/search-image?query=creamy%20cappuccino%20with%20perfect%20foam%20art%20in%20white%20cup%20on%20saucer%20with%20golden%20lighting%20and%20coffee%20beans%20scattered%20around%20elegant%20presentation&width=300&height=300&seq=cappuccino&orientation=squarish">
+<img src="https://readdy.ai/api/search-image?query=creamy%20cappuccino%20with%20perfect%20foam%20art%20in%20white%20cup%20on%20saucer%20with%20golden%20lighting%20and%20coffee%20beans%20scattered%20around%20elegant%20presentation&width=300&height=300&seq=cappuccino&orientation=squarish" alt="Golden Cappuccino" class="w-full h-48 object-cover rounded-lg mb-4">
+<h3 class="text-xl font-['Cormorant_Garamond'] font-semibold mb-2">Golden Cappuccino</h3>
+<p class="text-gray-400 text-sm mb-4">Velvety steamed milk with our signature espresso blend</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-['Montserrat'] font-semibold text-lg">AED 620</span>
+<button class="bg-primary text-[#1A1A1A] px-4 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Order Now</button>
+</div>
+</div>
+<div class="coffee-card p-6 rounded-lg border border-primary border-opacity-20 cursor-pointer" data-category="hot" data-name="Mocha Delight" data-price="680" data-image="https://readdy.ai/api/search-image?query=rich%20chocolate%20mocha%20coffee%20with%20whipped%20cream%20and%20chocolate%20shavings%20in%20glass%20mug%20with%20warm%20ambient%20lighting%20and%20cozy%20atmosphere&width=300&height=300&seq=mocha&orientation=squarish">
+<img src="https://readdy.ai/api/search-image?query=rich%20chocolate%20mocha%20coffee%20with%20whipped%20cream%20and%20chocolate%20shavings%20in%20glass%20mug%20with%20warm%20ambient%20lighting%20and%20cozy%20atmosphere&width=300&height=300&seq=mocha&orientation=squarish" alt="Mocha Delight" class="w-full h-48 object-cover rounded-lg mb-4">
+<h3 class="text-xl font-['Cormorant_Garamond'] font-semibold mb-2">Mocha Delight</h3>
+<p class="text-gray-400 text-sm mb-4">Perfect blend of espresso, steamed milk, and premium chocolate</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-['Montserrat'] font-semibold text-lg">AED 680</span>
+<button class="bg-primary text-[#1A1A1A] px-4 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Order Now</button>
+</div>
+</div>
+<!-- Cold Brew Items -->
+<div class="coffee-card p-6 rounded-lg border border-primary border-opacity-20 cursor-pointer" data-category="cold" data-name="Iced Americano" data-price="580" data-image="https://readdy.ai/api/search-image?query=refreshing%20iced%20americano%20in%20tall%20glass%20with%20ice%20cubes%20and%20dark%20coffee%20with%20golden%20lighting%20on%20wooden%20surface%20perfect%20cold%20coffee%20presentation&width=300&height=300&seq=iced-americano&orientation=squarish">
+<img src="https://readdy.ai/api/search-image?query=refreshing%20iced%20americano%20in%20tall%20glass%20with%20ice%20cubes%20and%20dark%20coffee%20with%20golden%20lighting%20on%20wooden%20surface%20perfect%20cold%20coffee%20presentation&width=300&height=300&seq=iced-americano&orientation=squarish" alt="Iced Americano" class="w-full h-48 object-cover rounded-lg mb-4">
+<h3 class="text-xl font-['Cormorant_Garamond'] font-semibold mb-2">Iced Americano</h3>
+<p class="text-gray-400 text-sm mb-4">Smooth espresso over ice, perfect for hot Dubai days</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-['Montserrat'] font-semibold text-lg">AED 580</span>
+<button class="bg-primary text-[#1A1A1A] px-4 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Order Now</button>
+</div>
+</div>
+<div class="coffee-card p-6 rounded-lg border border-primary border-opacity-20 cursor-pointer" data-category="cold" data-name="Cold Brew Special" data-price="650" data-image="https://readdy.ai/api/search-image?query=premium%20cold%20brew%20coffee%20in%20elegant%20glass%20bottle%20with%20ice%20and%20coffee%20beans%20smooth%20dark%20coffee%20with%20golden%20accents%20and%20sophisticated%20presentation&width=300&height=300&seq=cold-brew&orientation=squarish">
+<img src="https://readdy.ai/api/search-image?query=premium%20cold%20brew%20coffee%20in%20elegant%20glass%20bottle%20with%20ice%20and%20coffee%20beans%20smooth%20dark%20coffee%20with%20golden%20accents%20and%20sophisticated%20presentation&width=300&height=300&seq=cold-brew&orientation=squarish" alt="Cold Brew Special" class="w-full h-48 object-cover rounded-lg mb-4">
+<h3 class="text-xl font-['Cormorant_Garamond'] font-semibold mb-2">Cold Brew Special</h3>
+<p class="text-gray-400 text-sm mb-4">12-hour slow-steeped cold brew with subtle sweetness</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-['Montserrat'] font-semibold text-lg">AED 650</span>
+<button class="bg-primary text-[#1A1A1A] px-4 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Order Now</button>
+</div>
+</div>
+<div class="coffee-card p-6 rounded-lg border border-primary border-opacity-20 cursor-pointer" data-category="cold" data-name="Iced Caramel Macchiato" data-price="720" data-image="https://readdy.ai/api/search-image?query=layered%20iced%20caramel%20macchiato%20in%20tall%20glass%20with%20caramel%20drizzle%20milk%20foam%20and%20espresso%20layers%20beautiful%20presentation%20with%20golden%20lighting&width=300&height=300&seq=caramel-macchiato&orientation=squarish">
+<img src="https://readdy.ai/api/search-image?query=layered%20iced%20caramel%20macchiato%20in%20tall%20glass%20with%20caramel%20drizzle%20milk%20foam%20and%20espresso%20layers%20beautiful%20presentation%20with%20golden%20lighting&width=300&height=300&seq=caramel-macchiato&orientation=squarish" alt="Iced Caramel Macchiato" class="w-full h-48 object-cover rounded-lg mb-4">
+<h3 class="text-xl font-['Cormorant_Garamond'] font-semibold mb-2">Iced Caramel Macchiato</h3>
+<p class="text-gray-400 text-sm mb-4">Layered perfection with espresso, milk, and caramel drizzle</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-['Montserrat'] font-semibold text-lg">AED 720</span>
+<button class="bg-primary text-[#1A1A1A] px-4 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Order Now</button>
+</div>
+</div>
+<!-- Specialty Items -->
+<div class="coffee-card p-6 rounded-lg border border-primary border-opacity-20 cursor-pointer" data-category="specialty" data-name="Arabian Cardamom Coffee" data-price="750" data-image="https://readdy.ai/api/search-image?query=traditional%20arabic%20coffee%20with%20cardamom%20in%20ornate%20golden%20cup%20with%20middle%20eastern%20spices%20and%20elegant%20presentation%20showcasing%20cultural%20coffee%20heritage&width=300&height=300&seq=arabic-coffee&orientation=squarish">
+<img src="https://readdy.ai/api/search-image?query=traditional%20arabic%20coffee%20with%20cardamom%20in%20ornate%20golden%20cup%20with%20middle%20eastern%20spices%20and%20elegant%20presentation%20showcasing%20cultural%20coffee%20heritage&width=300&height=300&seq=arabic-coffee&orientation=squarish" alt="Arabian Cardamom Coffee" class="w-full h-48 object-cover rounded-lg mb-4">
+<h3 class="text-xl font-['Cormorant_Garamond'] font-semibold mb-2">Arabian Cardamom Coffee</h3>
+<p class="text-gray-400 text-sm mb-4">Traditional blend with aromatic cardamom and saffron notes</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-['Montserrat'] font-semibold text-lg">AED 750</span>
+<button class="bg-primary text-[#1A1A1A] px-4 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Order Now</button>
+</div>
+</div>
+<div class="coffee-card p-6 rounded-lg border border-primary border-opacity-20 cursor-pointer" data-category="specialty" data-name="Honey Lavender Latte" data-price="780" data-image="https://readdy.ai/api/search-image?query=elegant%20lavender%20honey%20latte%20with%20purple%20lavender%20flowers%20and%20golden%20honey%20drizzle%20in%20white%20ceramic%20cup%20with%20artistic%20foam%20and%20sophisticated%20presentation&width=300&height=300&seq=lavender-latte&orientation=squarish">
+<img src="https://readdy.ai/api/search-image?query=elegant%20lavender%20honey%20latte%20with%20purple%20lavender%20flowers%20and%20golden%20honey%20drizzle%20in%20white%20ceramic%20cup%20with%20artistic%20foam%20and%20sophisticated%20presentation&width=300&height=300&seq=lavender-latte&orientation=squarish" alt="Honey Lavender Latte" class="w-full h-48 object-cover rounded-lg mb-4">
+<h3 class="text-xl font-['Cormorant_Garamond'] font-semibold mb-2">Honey Lavender Latte</h3>
+<p class="text-gray-400 text-sm mb-4">Floral lavender with organic honey and steamed oat milk</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-['Montserrat'] font-semibold text-lg">AED 780</span>
+<button class="bg-primary text-[#1A1A1A] px-4 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Order Now</button>
+</div>
+</div>
+<div class="coffee-card p-6 rounded-lg border border-primary border-opacity-20 cursor-pointer" data-category="specialty" data-name="Golden Turmeric Latte" data-price="800" data-image="https://readdy.ai/api/search-image?query=golden%20turmeric%20latte%20with%20vibrant%20yellow%20color%20in%20ceramic%20cup%20with%20turmeric%20powder%20and%20spices%20around%20warm%20lighting%20healthy%20specialty%20drink%20presentation&width=300&height=300&seq=turmeric-latte&orientation=squarish">
+<img src="https://readdy.ai/api/search-image?query=golden%20turmeric%20latte%20with%20vibrant%20yellow%20color%20in%20ceramic%20cup%20with%20turmeric%20powder%20and%20spices%20around%20warm%20lighting%20healthy%20specialty%20drink%20presentation&width=300&height=300&seq=turmeric-latte&orientation=squarish" alt="Golden Turmeric Latte" class="w-full h-48 object-cover rounded-lg mb-4">
+<h3 class="text-xl font-['Cormorant_Garamond'] font-semibold mb-2">Golden Turmeric Latte</h3>
+<p class="text-gray-400 text-sm mb-4">Anti-inflammatory blend with turmeric, ginger, and coconut milk</p>
+<div class="flex justify-between items-center">
+<span class="text-primary font-['Montserrat'] font-semibold text-lg">AED 800</span>
+<button class="bg-primary text-[#1A1A1A] px-4 py-2 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Order Now</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gallery Section -->
+<section id="gallery" class="py-20 bg-gradient-to-b from-[#2A2A2A] to-[#1A1A1A]">
+<div class="max-w-7xl mx-auto px-4">
+<div class="text-center mb-16 fade-in">
+<h2 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-6 text-primary">Gallery</h2>
+<p class="text-xl text-gray-300 max-w-3xl mx-auto">
+Step into our world through these captured moments of coffee artistry and cozy ambiance.
+</p>
+</div>
+<div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+<div class="masonry-item break-inside-avoid">
+<img id="gallery-img-1" src="https://readdy.ai/api/search-image?query=cozy%20coffee%20shop%20interior%20with%20warm%20lighting%20comfortable%20seating%20area%20books%20and%20plants%20creating%20inviting%20atmosphere%20for%20customers%20to%20relax%20and%20enjoy%20coffee&width=400&height=500&seq=gallery-1&orientation=portrait" alt="Cozy Interior" class="w-full rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+</div>
+<div class="masonry-item break-inside-avoid">
+<img src="https://readdy.ai/api/search-image?query=barista%20creating%20latte%20art%20with%20skilled%20hands%20pouring%20steamed%20milk%20into%20espresso%20creating%20beautiful%20heart%20pattern%20in%20white%20ceramic%20cup%20professional%20coffee%20making&width=400&height=300&seq=gallery-2&orientation=landscape" alt="Latte Art" class="w-full rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+</div>
+<div class="masonry-item break-inside-avoid">
+<img src="https://readdy.ai/api/search-image?query=variety%20of%20freshly%20roasted%20coffee%20beans%20in%20wooden%20bowls%20with%20different%20roast%20levels%20from%20light%20to%20dark%20showing%20quality%20and%20diversity%20of%20coffee%20selection&width=400&height=400&seq=gallery-3&orientation=squarish" alt="Coffee Beans" class="w-full rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+</div>
+<div class="masonry-item break-inside-avoid">
+<img src="https://readdy.ai/api/search-image?query=customers%20enjoying%20coffee%20and%20conversation%20in%20warm%20coffee%20shop%20environment%20with%20natural%20lighting%20and%20comfortable%20atmosphere%20showing%20community%20aspect&width=400&height=600&seq=gallery-4&orientation=portrait" alt="Happy Customers" class="w-full rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+</div>
+<div class="masonry-item break-inside-avoid">
+<img src="https://readdy.ai/api/search-image?query=coffee%20brewing%20equipment%20including%20pour%20over%20dripper%20french%20press%20and%20espresso%20machine%20showcasing%20different%20brewing%20methods%20and%20coffee%20preparation%20tools&width=400&height=350&seq=gallery-5&orientation=landscape" alt="Brewing Equipment" class="w-full rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+</div>
+<div class="masonry-item break-inside-avoid">
+<img src="https://readdy.ai/api/search-image?query=beautiful%20coffee%20shop%20exterior%20with%20outdoor%20seating%20area%20plants%20and%20warm%20lighting%20creating%20welcoming%20entrance%20and%20inviting%20street%20view%20atmosphere&width=400&height=450&seq=gallery-6&orientation=portrait" alt="Exterior View" class="w-full rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+</div>
+</div>
+</div>
+</section>
+<!-- Visit Us Section -->
+<section id="visit" class="py-20 bg-[#1A1A1A]">
+<div class="max-w-7xl mx-auto px-4">
+<div class="text-center mb-16 fade-in">
+<h2 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-6 text-primary">Visit Us</h2>
+<p class="text-xl text-gray-300 max-w-3xl mx-auto">
+Find us in the heart of Muhaisnah 4, Dubai. We're open daily, ready to serve you the perfect cup.
+</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="space-y-8">
+<div class="bg-[#2A2A2A] p-8 rounded-lg border border-primary border-opacity-20">
+<h3 class="text-2xl font-['Playfair_Display'] font-semibold mb-6 text-primary">Location & Hours</h3>
+<div class="space-y-6">
+<div class="flex items-start space-x-4">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-map-pin-line text-primary text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold mb-1">Address</h4>
+<p class="text-gray-300">Muhaisnah 4, Dubai, United Arab Emirates</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-time-line text-primary text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold mb-2">Opening Hours</h4>
+<div class="space-y-1 text-gray-300">
+<p>Monday - Friday: 6:00 AM - 11:00 PM</p>
+<p>Saturday - Sunday: 7:00 AM - 12:00 AM</p>
+</div>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-phone-line text-primary text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold mb-1">Contact</h4>
+<p class="text-gray-300">+971 50 123 4567</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-mail-line text-primary text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold mb-1">Email</h4>
+<p class="text-gray-300">hello@coffeetales.site</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-[#2A2A2A] p-8 rounded-lg border border-primary border-opacity-20">
+<h3 class="text-2xl font-['Playfair_Display'] font-semibold mb-6 text-primary">What to Expect</h3>
+<ul class="space-y-3 text-gray-300">
+<li class="flex items-center space-x-3">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-check-line text-primary"></i>
+</div>
+<span>Free Wi-Fi for all customers</span>
+</li>
+<li class="flex items-center space-x-3">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-check-line text-primary"></i>
+</div>
+<span>Comfortable seating areas</span>
+</li>
+<li class="flex items-center space-x-3">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-check-line text-primary"></i>
+</div>
+<span>Outdoor terrace available</span>
+</li>
+<li class="flex items-center space-x-3">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-check-line text-primary"></i>
+</div>
+<span>Wheelchair accessible</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="bg-[#2A2A2A] rounded-lg overflow-hidden border border-primary border-opacity-20">
+<div class="h-96 relative" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+<div class="text-center">
+<div class="w-12 h-12 flex items-center justify-center bg-primary rounded-full mx-auto mb-4">
+<i class="ri-map-pin-fill text-[#1A1A1A] text-xl"></i>
+</div>
+<p class="text-white font-semibold">CoffeeTales</p>
+<p class="text-gray-300 text-sm">Muhaisnah 4, Dubai</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Blog Section -->
+<section id="blog" class="py-20 bg-gradient-to-b from-[#2A2A2A] to-[#1A1A1A]">
+<div class="max-w-7xl mx-auto px-4">
+<div class="text-center mb-16 fade-in">
+<h2 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-6 text-primary">Coffee Tales Blog</h2>
+<p class="text-xl text-gray-300 max-w-3xl mx-auto">
+Discover brewing techniques, customer stories, and the fascinating world of coffee culture.
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<article class="blog-card rounded-lg overflow-hidden border border-primary border-opacity-20">
+<img src="https://readdy.ai/api/search-image?query=coffee%20brewing%20guide%20showing%20pour%20over%20technique%20with%20professional%20barista%20hands%20demonstrating%20proper%20water%20pouring%20method%20over%20coffee%20grounds%20in%20dripper%20setup&width=400&height=250&seq=blog-1&orientation=landscape" alt="Brewing Guide" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center space-x-2 mb-3">
+<span class="bg-primary text-[#1A1A1A] px-3 py-1 rounded-full text-xs font-medium">Brewing Guide</span>
+<span class="text-gray-400 text-sm">Dec 15, 2024</span>
+</div>
+<h3 class="text-xl font-['Playfair_Display'] font-semibold mb-3">The Perfect Pour Over: A Step-by-Step Guide</h3>
+<p class="text-gray-300 text-sm mb-4">Master the art of pour-over coffee with our comprehensive guide. Learn the techniques that make every cup exceptional.</p>
+<a href="https://readdy.ai/home/0148b5a2-8ee7-4974-ae9e-6d171165da3d/8802ba75-f7c6-4346-b6fc-b162ed28d0ef" data-readdy="true" class="text-primary hover:text-opacity-80 font-medium text-sm inline-block">Read More →</a>
+</div>
+</article>
+<article class="blog-card rounded-lg overflow-hidden border border-primary border-opacity-20">
+<img src="https://readdy.ai/api/search-image?query=happy%20customer%20enjoying%20coffee%20in%20cozy%20cafe%20setting%20with%20warm%20smile%20and%20comfortable%20atmosphere%20showing%20positive%20coffee%20shop%20experience%20and%20community%20feeling&width=400&height=250&seq=blog-2&orientation=landscape" alt="Customer Story" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center space-x-2 mb-3">
+<span class="bg-secondary text-white px-3 py-1 rounded-full text-xs font-medium">Customer Story</span>
+<span class="text-gray-400 text-sm">Dec 12, 2024</span>
+</div>
+<h3 class="text-xl font-['Playfair_Display'] font-semibold mb-3">Sarah's Morning Ritual: A CoffeeTales Story</h3>
+<p class="text-gray-300 text-sm mb-4">Meet Sarah, a regular customer who found her perfect morning routine at CoffeeTales. Her story will warm your heart.</p>
+<a href="https://readdy.ai/home/0148b5a2-8ee7-4974-ae9e-6d171165da3d/8802ba75-f7c6-4346-b6fc-b162ed28d0ef" data-readdy="true" class="text-primary hover:text-opacity-80 font-medium text-sm inline-block">Read More →</a>
+</div>
+</article>
+<article class="blog-card rounded-lg overflow-hidden border border-primary border-opacity-20">
+<img src="https://readdy.ai/api/search-image?query=coffee%20beans%20from%20different%20regions%20displayed%20in%20wooden%20bowls%20showing%20variety%20of%20origins%20with%20labels%20and%20descriptions%20highlighting%20global%20coffee%20diversity&width=400&height=250&seq=blog-3&orientation=landscape" alt="Coffee Origins" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center space-x-2 mb-3">
+<span class="bg-primary text-[#1A1A1A] px-3 py-1 rounded-full text-xs font-medium">Coffee Culture</span>
+<span class="text-gray-400 text-sm">Dec 10, 2024</span>
+</div>
+<h3 class="text-xl font-['Playfair_Display'] font-semibold mb-3">Exploring Coffee Origins: From Bean to Cup</h3>
+<p class="text-gray-300 text-sm mb-4">Journey through the world's finest coffee regions and discover how geography shapes the flavors in your cup.</p>
+<a href="https://readdy.ai/home/0148b5a2-8ee7-4974-ae9e-6d171165da3d/8802ba75-f7c6-4346-b6fc-b162ed28d0ef" data-readdy="true" class="text-primary hover:text-opacity-80 font-medium text-sm inline-block">Read More →</a>
+</div>
+</article>
+<article class="blog-card rounded-lg overflow-hidden border border-primary border-opacity-20">
+<img src="https://readdy.ai/api/search-image?query=french%20press%20coffee%20brewing%20method%20with%20timer%20and%20coffee%20grounds%20showing%20step%20by%20step%20process%20of%20making%20perfect%20french%20press%20coffee%20with%20golden%20lighting&width=400&height=250&seq=blog-4&orientation=landscape" alt="French Press Guide" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center space-x-2 mb-3">
+<span class="bg-primary text-[#1A1A1A] px-3 py-1 rounded-full text-xs font-medium">Brewing Guide</span>
+<span class="text-gray-400 text-sm">Dec 8, 2024</span>
+</div>
+<h3 class="text-xl font-['Playfair_Display'] font-semibold mb-3">French Press Mastery: Bold and Beautiful</h3>
+<p class="text-gray-300 text-sm mb-4">Unlock the secrets of French press brewing and create rich, full-bodied coffee that rivals any café.</p>
+<a href="https://readdy.ai/home/0148b5a2-8ee7-4974-ae9e-6d171165da3d/8802ba75-f7c6-4346-b6fc-b162ed28d0ef" data-readdy="true" class="text-primary hover:text-opacity-80 font-medium text-sm inline-block">Read More →</a>
+</div>
+</article>
+<article class="blog-card rounded-lg overflow-hidden border border-primary border-opacity-20">
+<img src="https://readdy.ai/api/search-image?query=coffee%20shop%20community%20event%20with%20people%20gathered%20around%20tables%20sharing%20stories%20and%20enjoying%20coffee%20together%20showing%20social%20aspect%20of%20coffee%20culture&width=400&height=250&seq=blog-5&orientation=landscape" alt="Community Event" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center space-x-2 mb-3">
+<span class="bg-secondary text-white px-3 py-1 rounded-full text-xs font-medium">Events</span>
+<span class="text-gray-400 text-sm">Dec 5, 2024</span>
+</div>
+<h3 class="text-xl font-['Playfair_Display'] font-semibold mb-3">Building Community One Cup at a Time</h3>
+<p class="text-gray-300 text-sm mb-4">How CoffeeTales became more than a café - it's a place where friendships bloom and stories are shared.</p>
+<a href="https://readdy.ai/home/0148b5a2-8ee7-4974-ae9e-6d171165da3d/8802ba75-f7c6-4346-b6fc-b162ed28d0ef" data-readdy="true" class="text-primary hover:text-opacity-80 font-medium text-sm inline-block">Read More →</a>
+</div>
+</article>
+<article class="blog-card rounded-lg overflow-hidden border border-primary border-opacity-20">
+<img src="https://readdy.ai/api/search-image?query=seasonal%20coffee%20drinks%20with%20autumn%20spices%20and%20winter%20warmers%20showing%20specialty%20seasonal%20menu%20items%20with%20cozy%20atmosphere%20and%20festive%20presentation&width=400&height=250&seq=blog-6&orientation=landscape" alt="Seasonal Drinks" class="w-full h-48 object-cover">
+<div class="p-6">
+<div class="flex items-center space-x-2 mb-3">
+<span class="bg-primary text-[#1A1A1A] px-3 py-1 rounded-full text-xs font-medium">Seasonal</span>
+<span class="text-gray-400 text-sm">Dec 3, 2024</span>
+</div>
+<h3 class="text-xl font-['Playfair_Display'] font-semibold mb-3">Winter Warmers: Seasonal Coffee Creations</h3>
+<p class="text-gray-300 text-sm mb-4">Discover our limited-time winter menu featuring spiced lattes and warming blends perfect for cold days.</p>
+<a href="https://readdy.ai/home/0148b5a2-8ee7-4974-ae9e-6d171165da3d/8802ba75-f7c6-4346-b6fc-b162ed28d0ef" data-readdy="true" class="text-primary hover:text-opacity-80 font-medium text-sm inline-block">Read More →</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- Customer Wall -->
+<section class="py-20 bg-[#1A1A1A]">
+<div class="max-w-7xl mx-auto px-4">
+<div class="text-center mb-16 fade-in">
+<h2 class="text-4xl md:text-5xl font-['Playfair_Display'] font-bold mb-6 text-primary">What Our Customers Say</h2>
+<p class="text-xl text-gray-300 max-w-3xl mx-auto">
+Real stories from real people who've made CoffeeTales part of their daily ritual.
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-[#2A2A2A] p-6 rounded-lg border border-primary border-opacity-20">
+<div class="flex items-center space-x-4 mb-4">
+<img src="https://readdy.ai/api/search-image?query=professional%20woman%20in%20her%20thirties%20with%20warm%20smile%20and%20business%20attire%20portrait%20photo%20for%20customer%20testimonial%20with%20natural%20lighting%20and%20friendly%20expression&width=80&height=80&seq=customer-1&orientation=squarish" alt="Emma Richardson" class="w-12 h-12 rounded-full object-cover">
+<div>
+<h4 class="font-semibold">Emma Richardson</h4>
+<p class="text-gray-400 text-sm">Marketing Director</p>
+</div>
+</div>
+<p class="text-gray-300 mb-4">"CoffeeTales isn't just a café, it's my sanctuary. The Golden Cappuccino is perfection in a cup, and the atmosphere makes every visit feel like coming home."</p>
+<div class="flex text-primary">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+</div>
+<div class="bg-[#2A2A2A] p-6 rounded-lg border border-primary border-opacity-20">
+<div class="flex items-center space-x-4 mb-4">
+<img src="https://readdy.ai/api/search-image?query=young%20professional%20man%20with%20beard%20and%20casual%20shirt%20smiling%20warmly%20for%20customer%20testimonial%20portrait%20with%20natural%20lighting%20and%20approachable%20expression&width=80&height=80&seq=customer-2&orientation=squarish" alt="Ahmed Al-Mansouri" class="w-12 h-12 rounded-full object-cover">
+<div>
+<h4 class="font-semibold">Ahmed Al-Mansouri</h4>
+<p class="text-gray-400 text-sm">Software Engineer</p>
+</div>
+</div>
+<p class="text-gray-300 mb-4">"The Arabian Cardamom Coffee brings back memories of my grandmother's kitchen. It's authentic, rich, and perfectly balanced. This place understands coffee culture."</p>
+<div class="flex text-primary">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+</div>
+<div class="bg-[#2A2A2A] p-6 rounded-lg border border-primary border-opacity-20">
+<div class="flex items-center space-x-4 mb-4">
+<img src="https://readdy.ai/api/search-image?query=creative%20young%20woman%20with%20artistic%20style%20and%20warm%20smile%20portrait%20photo%20for%20customer%20testimonial%20with%20natural%20lighting%20and%20friendly%20creative%20expression&width=80&height=80&seq=customer-3&orientation=squarish" alt="Lisa Chen" class="w-12 h-12 rounded-full object-cover">
+<div>
+<h4 class="font-semibold">Lisa Chen</h4>
+<p class="text-gray-400 text-sm">Graphic Designer</p>
+</div>
+</div>
+<p class="text-gray-300 mb-4">"I've found my creative haven at CoffeeTales. The ambiance is perfect for work, and their Cold Brew Special keeps me energized through long design sessions."</p>
+<div class="flex text-primary">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-gradient-to-t from-[#0A0A0A] to-[#1A1A1A] py-16">
+<div class="max-w-7xl mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div>
+<div class="mb-6">
+<span class="text-3xl font-['Pacifico'] text-primary">CoffeeTales</span>
+<p class="text-gray-300 mt-4">Every cup has a story. What's yours?</p>
+</div>
+<div class="space-y-3">
+<div class="flex items-center space-x-3">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-map-pin-line text-primary"></i>
+</div>
+<span class="text-gray-300">Muhaisnah 4, Dubai, UAE</span>
+</div>
+<div class="flex items-center space-x-3">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-phone-line text-primary"></i>
+</div>
+<span class="text-gray-300">+971 50 123 4567</span>
+</div>
+<div class="flex items-center space-x-3">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-mail-line text-primary"></i>
+</div>
+<span class="text-gray-300">hello@coffeetales.site</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-['Playfair_Display'] font-semibold mb-6 text-primary">Quick Links</h3>
+<ul class="space-y-3">
+<li><a href="#home" class="text-gray-300 hover:text-primary transition-colors">Home</a></li>
+<li><a href="#story" class="text-gray-300 hover:text-primary transition-colors">Our Story</a></li>
+<li><a href="#menu" class="text-gray-300 hover:text-primary transition-colors">Menu</a></li>
+<li><a href="#gallery" class="text-gray-300 hover:text-primary transition-colors">Gallery</a></li>
+<li><a href="#visit" class="text-gray-300 hover:text-primary transition-colors">Visit Us</a></li>
+<li><a href="#blog" class="text-gray-300 hover:text-primary transition-colors">Blog</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-['Playfair_Display'] font-semibold mb-6 text-primary">Stay Connected</h3>
+<div class="flex space-x-4 mb-6">
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-[#2A2A2A] rounded-full hover:bg-primary hover:text-[#1A1A1A] transition-all">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-[#2A2A2A] rounded-full hover:bg-primary hover:text-[#1A1A1A] transition-all">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-[#2A2A2A] rounded-full hover:bg-primary hover:text-[#1A1A1A] transition-all">
+<i class="ri-twitter-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-[#2A2A2A] rounded-full hover:bg-primary hover:text-[#1A1A1A] transition-all">
+<i class="ri-whatsapp-fill"></i>
+</a>
+</div>
+<div>
+<p class="text-gray-300 mb-3">Subscribe to our newsletter</p>
+<div class="flex">
+<input type="email" placeholder="Your email" class="flex-1 px-4 py-2 bg-[#2A2A2A] border border-primary border-opacity-20 rounded-l-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary">
+<button class="bg-primary text-[#1A1A1A] px-6 py-2 !rounded-button rounded-l-none font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Subscribe</button>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-700 mt-12 pt-8 text-center">
+<p class="text-gray-400">&copy; 2024 CoffeeTales. All rights reserved. | Crafted with ❤️ in Dubai</p>
+</div>
+</div>
+</footer>
+<!-- Modals -->
+<!-- Gallery Modal -->
+<div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+<div class="max-w-4xl w-full mx-4 relative">
+<button id="close-gallery-modal" class="absolute -top-12 right-0 w-10 h-10 flex items-center justify-center bg-primary rounded-full hover:bg-opacity-80 transition-all">
+<i class="ri-close-line text-[#1A1A1A] text-xl"></i>
+</button>
+<div class="bg-[#1A1A1A] rounded-lg p-6 border border-primary border-opacity-20">
+<img id="gallery-modal-img" src="" alt="" class="w-full rounded-lg mb-4">
+<div class="text-center">
+<h4 id="gallery-modal-title" class="text-xl font-['Playfair_Display'] font-semibold text-primary mb-2"></h4>
+<p id="gallery-modal-desc" class="text-gray-300"></p>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Modal -->
+<div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+<div class="bg-[#1A1A1A] rounded-lg p-8 max-w-md w-full mx-4 border border-primary border-opacity-20">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-2xl font-['Playfair_Display'] font-semibold text-primary">Order Details</h3>
+<button id="close-order-modal" class="w-8 h-8 flex items-center justify-center">
+<i class="ri-close-line text-white text-xl"></i>
+</button>
+</div>
+<div id="order-content">
+<!-- Dynamic content will be inserted here -->
+</div>
+</div>
+</div>
+<!-- Mood Picker Modal -->
+<div id="mood-picker-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+<div class="bg-[#1A1A1A] rounded-lg p-8 max-w-md w-full mx-4 border border-primary border-opacity-20">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-2xl font-['Playfair_Display'] font-semibold text-primary">Coffee Mood Picker</h3>
+<button id="close-mood-modal" class="w-8 h-8 flex items-center justify-center">
+<i class="ri-close-line text-white text-xl"></i>
+</button>
+</div>
+<div class="space-y-4">
+<p class="text-gray-300 mb-6">How are you feeling today? Let us suggest the perfect coffee for your mood.</p>
+<div class="grid grid-cols-2 gap-4">
+<button class="mood-option p-4 bg-[#2A2A2A] rounded-lg border border-primary border-opacity-20 hover:border-primary transition-all" data-mood="energetic">
+<div class="w-8 h-8 flex items-center justify-center mx-auto mb-2">
+<i class="ri-flashlight-line text-primary text-xl"></i>
+</div>
+<p class="text-white font-medium">Energetic</p>
+</button>
+<button class="mood-option p-4 bg-[#2A2A2A] rounded-lg border border-primary border-opacity-20 hover:border-primary transition-all" data-mood="relaxed">
+<div class="w-8 h-8 flex items-center justify-center mx-auto mb-2">
+<i class="ri-leaf-line text-primary text-xl"></i>
+</div>
+<p class="text-white font-medium">Relaxed</p>
+</button>
+<button class="mood-option p-4 bg-[#2A2A2A] rounded-lg border border-primary border-opacity-20 hover:border-primary transition-all" data-mood="focused">
+<div class="w-8 h-8 flex items-center justify-center mx-auto mb-2">
+<i class="ri-focus-line text-primary text-xl"></i>
+</div>
+<p class="text-white font-medium">Focused</p>
+</button>
+<button class="mood-option p-4 bg-[#2A2A2A] rounded-lg border border-primary border-opacity-20 hover:border-primary transition-all" data-mood="cozy">
+<div class="w-8 h-8 flex items-center justify-center mx-auto mb-2">
+<i class="ri-home-heart-line text-primary text-xl"></i>
+</div>
+<p class="text-white font-medium">Cozy</p>
+</button>
+</div>
+<div id="mood-suggestion" class="mt-6 p-4 bg-[#2A2A2A] rounded-lg border border-primary border-opacity-20 hidden">
+<!-- Suggestion content will be inserted here -->
+</div>
+</div>
+</div>
+</div>
+<!-- Brew Timer Modal -->
+<div id="brew-timer-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+<div class="bg-[#1A1A1A] rounded-lg p-8 max-w-md w-full mx-4 border border-primary border-opacity-20">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-2xl font-['Playfair_Display'] font-semibold text-primary">Brew Timer</h3>
+<button id="close-timer-modal" class="w-8 h-8 flex items-center justify-center">
+<i class="ri-close-line text-white text-xl"></i>
+</button>
+</div>
+<div class="space-y-6">
+<div class="flex justify-center space-x-4">
+<button class="brew-method active px-4 py-2 bg-primary text-[#1A1A1A] rounded-lg font-medium whitespace-nowrap" data-method="v60">V60</button>
+<button class="brew-method px-4 py-2 bg-[#2A2A2A] text-white rounded-lg font-medium hover:bg-primary hover:text-[#1A1A1A] transition-all whitespace-nowrap" data-method="french">French Press</button>
+<button class="brew-method px-4 py-2 bg-[#2A2A2A] text-white rounded-lg font-medium hover:bg-primary hover:text-[#1A1A1A] transition-all whitespace-nowrap" data-method="aeropress">AeroPress</button>
+</div>
+<div class="text-center">
+<div class="w-32 h-32 mx-auto mb-4 brew-timer rounded-full flex items-center justify-center">
+<span id="timer-display" class="text-3xl font-bold text-white">4:00</span>
+</div>
+<div class="space-y-4">
+<button id="start-timer" class="bg-primary text-[#1A1A1A] px-6 py-3 !rounded-button font-semibold hover:bg-opacity-90 transition-all whitespace-nowrap">Start Timer</button>
+<div id="brew-instructions" class="text-gray-300 text-sm">
+<p><strong>V60 Instructions:</strong></p>
+<p>1. Rinse filter and preheat V60</p>
+<p>2. Add 22g coffee, create well</p>
+<p>3. Pour 50g water, bloom 30s</p>
+<p>4. Pour to 250g in circular motions</p>
+<p>5. Total brew time: 4 minutes</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script id="navigation-script">
+function initNavigation() {
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+if (mobileMenuBtn && mobileMenu) {
+mobileMenuBtn.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+});
+}
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
+});
+if (mobileMenu) {
+mobileMenu.classList.add('hidden');
+}
+}
+});
+});
+}
+document.addEventListener('DOMContentLoaded', initNavigation);
+</script>
+<script id="animations-script">
+function initAnimations() {
+const observerOptions = {
+threshold: 0.1,
+rootMargin: '0px 0px -50px 0px'
+};
+// Fade in animations
+const fadeElements = document.querySelectorAll('.fade-in');
+if (fadeElements.length > 0) {
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('visible');
+}
+});
+}, observerOptions);
+fadeElements.forEach(el => observer.observe(el));
+}
+// Timeline animations
+const timelineElements = document.querySelectorAll('.timeline-item');
+if (timelineElements.length > 0) {
+const timelineObserver = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('animate');
+}
+});
+}, observerOptions);
+timelineElements.forEach(el => timelineObserver.observe(el));
+}
+}
+document.addEventListener('DOMContentLoaded', initAnimations);
+</script>
+<script id="menu-functionality">
+document.addEventListener('DOMContentLoaded', function() {
+const menuFilters = document.querySelectorAll('.menu-filter');
+const menuItems = document.querySelectorAll('.coffee-card');
+const orderModal = document.getElementById('order-modal');
+const closeOrderModal = document.getElementById('close-order-modal');
+const orderContent = document.getElementById('order-content');
+// Menu filtering
+menuFilters.forEach(filter => {
+filter.addEventListener('click', function() {
+const filterValue = this.getAttribute('data-filter');
+// Update active filter
+menuFilters.forEach(f => {
+f.classList.remove('active', 'bg-primary', 'text-[#1A1A1A]');
+f.classList.add('text-white');
+});
+this.classList.add('active', 'bg-primary', 'text-[#1A1A1A]');
+this.classList.remove('text-white');
+// Filter menu items
+menuItems.forEach(item => {
+const category = item.getAttribute('data-category');
+if (filterValue === 'all' || category === filterValue) {
+item.style.display = 'block';
+} else {
+item.style.display = 'none';
+}
+});
+});
+});
+// Order modal functionality
+menuItems.forEach(item => {
+item.addEventListener('click', function() {
+const name = this.getAttribute('data-name');
+const price = this.getAttribute('data-price');
+const image = this.getAttribute('data-image');
+orderContent.innerHTML = `
+<img src="${image}" alt="${name}" class="w-full h-48 object-cover rounded-lg mb-4">
+<h4 class="text-xl font-['Cormorant_Garamond'] font-semibold mb-2">${name}</h4>
+<p class="text-primary font-['Montserrat'] font-semibold text-lg mb-4">AED ${price}</p>
+<div class="space-y-4">
+<div>
+<label class="block text-white mb-2">Quantity</label>
+<input type="number" id="quantity" value="1" min="1" class="w-full px-4 py-2 bg-[#2A2A2A] border border-primary border-opacity-20 rounded-lg text-white">
+</div>
+<div>
+<label class="block text-white mb-2">Your Name</label>
+<input type="text" id="customer-name" placeholder="Enter your name" class="w-full px-4 py-2 bg-[#2A2A2A] border border-primary border-opacity-20 rounded-lg text-white placeholder-gray-400">
+</div>
+<div>
+<label class="block text-white mb-2">Phone Number</label>
+<input type="tel" id="customer-phone" placeholder="Enter your phone" class="w-full px-4 py-2 bg-[#2A2A2A] border border-primary border-opacity-20 rounded-lg text-white placeholder-gray-400">
+</div>
+<button onclick="sendWhatsAppOrder('${name}', '${price}')" class="w-full bg-green-500 text-white px-6 py-3 !rounded-button font-semibold hover:bg-green-600 transition-all whitespace-nowrap">
+Order via WhatsApp
+</button>
+</div>
+`;
+orderModal.classList.remove('hidden');
+});
+});
+closeOrderModal.addEventListener('click', function() {
+orderModal.classList.add('hidden');
+});
+// Close modal when clicking outside
+orderModal.addEventListener('click', function(e) {
+if (e.target === orderModal) {
+orderModal.classList.add('hidden');
+}
+});
+});
+function sendWhatsAppOrder(itemName, itemPrice) {
+const quantity = document.getElementById('quantity').value;
+const customerName = document.getElementById('customer-name').value;
+const customerPhone = document.getElementById('customer-phone').value;
+if (!customerName || !customerPhone) {
+alert('Please fill in all required fields');
+return;
+}
+const totalPrice = parseInt(itemPrice) * parseInt(quantity);
+const message = `Hello CoffeeTales! I would like to place an order:
+*Order Details:*
+- Item: ${itemName}
+- Price: AED ${itemPrice} each
+- Quantity: ${quantity}
+- Total: AED ${totalPrice}
+*Customer Information:*
+- Name: ${customerName}
+- Phone: ${customerPhone}
+*Payment Method:* Cash on Delivery
+Please confirm my order. Thank you!`;
+const whatsappURL = `https://wa.me/971501234567?text=${encodeURIComponent(message)}`;
+window.open(whatsappURL, '_blank');
+document.getElementById('order-modal').classList.add('hidden');
+}
+</script>
+<script id="interactive-features">
+document.addEventListener('DOMContentLoaded', function() {
+// Gallery Modal
+const galleryModal = document.getElementById('gallery-modal');
+const closeGalleryModal = document.getElementById('close-gallery-modal');
+const galleryModalImg = document.getElementById('gallery-modal-img');
+const galleryModalTitle = document.getElementById('gallery-modal-title');
+const galleryModalDesc = document.getElementById('gallery-modal-desc');
+const galleryImg1 = document.getElementById('gallery-img-1');
+galleryImg1.addEventListener('click', function() {
+galleryModalImg.src = this.src;
+galleryModalTitle.textContent = 'Our Cozy Interior';
+galleryModalDesc.textContent = 'Experience the warmth and comfort of our thoughtfully designed space, where every corner invites you to relax and enjoy your perfect cup of coffee. Surrounded by carefully curated books and lush plants, our interior creates the perfect atmosphere for both quiet contemplation and friendly gatherings.';
+galleryModal.classList.remove('hidden');
+});
+closeGalleryModal.addEventListener('click', function() {
+galleryModal.classList.add('hidden');
+});
+galleryModal.addEventListener('click', function(e) {
+if (e.target === galleryModal) {
+galleryModal.classList.add('hidden');
+}
+});
+const moodPickerBtn = document.getElementById('mood-picker-btn');
+const brewTimerBtn = document.getElementById('brew-timer-btn');
+const whatsappBtn = document.getElementById('whatsapp-btn');
+const ambientToggle = document.getElementById('ambient-toggle');
+const moodModal = document.getElementById('mood-picker-modal');
+const timerModal = document.getElementById('brew-timer-modal');
+const closeMoodModal = document.getElementById('close-mood-modal');
+const closeTimerModal = document.getElementById('close-timer-modal');
+// Mood Picker
+moodPickerBtn.addEventListener('click', function() {
+moodModal.classList.remove('hidden');
+});
+closeMoodModal.addEventListener('click', function() {
+moodModal.classList.add('hidden');
+});
+document.querySelectorAll('.mood-option').forEach(option => {
+option.addEventListener('click', function() {
+const mood = this.getAttribute('data-mood');
+const suggestion = document.getElementById('mood-suggestion');
+const suggestions = {
+energetic: {
+drink: 'Signature Espresso',
+description: 'Bold and intense, perfect for kickstarting your day with pure energy.'
+},
+relaxed: {
+drink: 'Honey Lavender Latte',
+description: 'Soothing lavender and sweet honey create the perfect calming experience.'
+},
+focused: {
+drink: 'Cold Brew Special',
+description: 'Smooth, sustained caffeine release to keep you sharp and concentrated.'
+},
+cozy: {
+drink: 'Golden Turmeric Latte',
+description: 'Warming spices and creamy texture for ultimate comfort and coziness.'
+}
+};
+const currentSuggestion = suggestions[mood];
+suggestion.innerHTML = `
+<h4 class="text-primary font-semibold mb-2">Perfect Match: ${currentSuggestion.drink}</h4>
+<p class="text-gray-300 text-sm">${currentSuggestion.description}</p>
+`;
+suggestion.classList.remove('hidden');
+});
+});
+// Brew Timer
+brewTimerBtn.addEventListener('click', function() {
+timerModal.classList.remove('hidden');
+});
+closeTimerModal.addEventListener('click', function() {
+timerModal.classList.add('hidden');
+});
+let timerInterval;
+let currentTime = 240; // 4 minutes in seconds
+document.querySelectorAll('.brew-method').forEach(method => {
+method.addEventListener('click', function() {
+document.querySelectorAll('.brew-method').forEach(m => {
+m.classList.remove('active', 'bg-primary', 'text-[#1A1A1A]');
+m.classList.add('bg-[#2A2A2A]', 'text-white');
+});
+this.classList.add('active', 'bg-primary', 'text-[#1A1A1A]');
+this.classList.remove('bg-[#2A2A2A]', 'text-white');
+const methodType = this.getAttribute('data-method');
+const instructions = document.getElementById('brew-instructions');
+const methodInstructions = {
+v60: {
+time: 240,
+instructions: `
+<p><strong>V60 Instructions:</strong></p>
+<p>1. Rinse filter and preheat V60</p>
+<p>2. Add 22g coffee, create well</p>
+<p>3. Pour 50g water, bloom 30s</p>
+<p>4. Pour to 250g in circular motions</p>
+<p>5. Total brew time: 4 minutes</p>
+`
+},
+french: {
+time: 240,
+instructions: `
+<p><strong>French Press Instructions:</strong></p>
+<p>1. Add 30g coarse ground coffee</p>
+<p>2. Pour 500g hot water (200°F)</p>
+<p>3. Stir gently and cover</p>
+<p>4. Steep for 4 minutes</p>
+<p>5. Press plunger down slowly</p>
+`
+},
+aeropress: {
+time: 120,
+instructions: `
+<p><strong>AeroPress Instructions:</strong></p>
+<p>1. Insert filter and rinse</p>
+<p>2. Add 17g fine coffee</p>
+<p>3. Pour 250g water, stir</p>
+<p>4. Steep for 1 minute</p>
+<p>5. Press for 30 seconds</p>
+`
+}
+};
+currentTime = methodInstructions[methodType].time;
+updateTimerDisplay();
+instructions.innerHTML = methodInstructions[methodType].instructions;
+});
+});
+document.getElementById('start-timer').addEventListener('click', function() {
+if (timerInterval) {
+clearInterval(timerInterval);
+}
+timerInterval = setInterval(function() {
+currentTime--;
+updateTimerDisplay();
+if (currentTime <= 0) {
+clearInterval(timerInterval);
+alert('Brewing complete! Enjoy your coffee!');
+currentTime = 240;
+updateTimerDisplay();
+}
+}, 1000);
+});
+function updateTimerDisplay() {
+const minutes = Math.floor(currentTime / 60);
+const seconds = currentTime % 60;
+document.getElementById('timer-display').textContent =
+`${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+// WhatsApp Contact
+whatsappBtn.addEventListener('click', function() {
+const message = `Hello CoffeeTales! I'd like to get in touch.`;
+const whatsappURL = `https://wa.me/971501234567?text=${encodeURIComponent(message)}`;
+window.open(whatsappURL, '_blank');
+});
+// Ambient Sound Toggle
+ambientToggle.addEventListener('click', function() {
+this.classList.toggle('active');
+// In a real implementation, this would control ambient sound playback
+if (this.classList.contains('active')) {
+console.log('Ambient sounds ON');
+} else {
+console.log('Ambient sounds OFF');
+}
+});
+// Close modals when clicking outside
+[moodModal, timerModal].forEach(modal => {
+modal.addEventListener('click', function(e) {
+if (e.target === modal) {
+modal.classList.add('hidden');
+}
+});
+});
+});
+</script>
+</body>
+</html>
